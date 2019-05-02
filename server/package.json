@@ -1,0 +1,13 @@
+{
+  "name": "kd_web_app",
+  "version": "1.0.0",
+  "description": "Node.js personal website on Docker",
+  "author": "Kaan Donbekci <kdonbekci@gmail.com>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.16.4"
+  }
+}
