@@ -2,10 +2,10 @@ FROM node:lts-slim
 
 WORKDIR /usr/kd/
 
-RUN mkdir -p client; mkdir -p client/dist; mkdir -p server
+# RUN mkdir -p client; mkdir -p client/dist; mkdir -p server
 
 
-COPY ./client/dist ./client/dist
+# COPY ./client/dist ./client/dist
 COPY ./server ./server
 
 WORKDIR /usr/kd/server

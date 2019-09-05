@@ -1,2 +1,2 @@
-src/server/node_modules
-src/server/npm-debug.log
+server/node_modules
+server/npm-debug.log
