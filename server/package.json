@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Kaan Donbekci's personal website server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Kaan Donbekci",
+  "license": "ISC",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "connect-redis": "^4.0.2",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "mongoose": "^5.6.12",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "redis": "^2.8.0"
+  }
+}
