@@ -1,0 +1,12 @@
+{
+  "name": "server-client",
+  "version": "1.0.0",
+  "description": "Kaan Donbekci's personal website server+client",
+  "scripts": {
+    "server": "cd server; nodemon server.js",
+    "client": "cd client; npm run start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Kaan Donbekci",
+  "license": "ISC"
+}
