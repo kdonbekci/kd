@@ -1,8 +1,5 @@
 require('dotenv').config({ path: '../../../.env' });
 const fs = require('fs');
-const mongoose = require('mongoose');
-const Project = require('../../models/Project');
-
 const queries = JSON.parse(fs.readFileSync('queries.json', 'utf8'));
 const { graphql } = require("@octokit/graphql");
 const githubAPI = graphql.defaults({
@@ -10,34 +7,30 @@ const githubAPI = graphql.defaults({
         authorization: `token ${process.env.GITHUB_TOKEN}`
     }
 });
-
-
-mongoose.connection.openUri(`mongodb://localhost:${process.env.MONGO_PORT}/${process.env.DB_NAME}`, { useNewUrlParser: true })
+const mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false);
+mongoose.connect(`mongodb://localhost:${process.env.MONGO_PORT}/${process.env.DB_NAME}`, {useNewUrlParser: true});
+let Project = require('../../models/Project');
+mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+mongoose.connection
     .once('open', () => {
         getAllRepos()
             .then(repos => {
+                console.info('Fetched repos from GitHub');
                 return updateDatabse(repos);
             })
-            .then(() => {
-                mongoose.disconnect()
+            .then((projects) => {
+                console.info('Updated MongoDB');
+                mongoose.connection.close();
             })
             .catch(err => {
-                console.error(err)
-                mongoose.disconnect()
+                console.error(err);
+                mongoose.connection.close();
             })
     })
     .on('error', err => console.error('MongoDB error:', err));
-// "repositoryTopics": {
-//     "edges": [
-//       {
-//         "node": {
-//           "topic": {
-//             "name": "scraper"
-//           }
-//         }
-//       },
 
-const getAllRepos = async () => githubAPI(queries.getAllRepos)
+const getAllRepos = () => githubAPI(queries.getAllRepos)
     .then(res => { return res.viewer.repositories.nodes; })
     .then(repos => {
         let repos_parsed = [];
@@ -55,22 +48,18 @@ const getAllRepos = async () => githubAPI(queries.getAllRepos)
             }
             delete repo.repositoryTopics;
             delete repo.id;
-            repo.topics = topics
+            repo.topics = topics;
             repo.languages = languages;
             repos_parsed.push(repo);
         });
         return repos_parsed;
     });
 
-
-const updateDatabse = async (repos) => {
-    // console.log(repos[0])
-    let test = new Project(repos[0]);
-    test.save()
-    .then(element => {
-        console.log(element)
-        console.log('aa')
-    })
-    .catch(err => console.error(err))
-
-};
+const updateDatabse = (repos) => {
+    promises = []
+    repos.forEach(project => {
+        query = {_id: project._id};
+        promises.push(Project.findOneAndUpdate(query, project, {upsert:true}));
+    });
+    return Promise.all(promises)
+}

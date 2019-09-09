@@ -5,9 +5,10 @@ const ProjectSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  _id: {
-    type: String
-  },
+  _id: String,
+  // repoId: {
+  //   type: String
+  // },
   url: {
     type: String,
     required: true
@@ -24,10 +25,7 @@ const ProjectSchema = new mongoose.Schema({
     required: true
   },
   languages:{
-    type: [Object],
-    // _id: {
-    //   id:false
-    // }
+    type: [Object]
   },
   topics: {
     type: [String]

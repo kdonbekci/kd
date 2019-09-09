@@ -10,6 +10,7 @@
   "author": "Kaan Donbekci",
   "license": "ISC",
   "dependencies": {
+    "@octokit/graphql": "^4.2.0",
     "compression": "^1.7.4",
     "connect-redis": "^4.0.2",
     "dotenv": "^8.1.0",

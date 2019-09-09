@@ -65,5 +65,3 @@ if (!module.parent) {
     console.info(`Started in ${env === 'development' ? env : 'production'} mode on port ${process.env.NODE_PORT}.`);
   });
 }
-
-// app.clo

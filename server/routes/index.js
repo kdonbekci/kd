@@ -1,12 +1,7 @@
 require('dotenv').config();
 
-const path = require('path')
-// const passport = require('passport');
-// const reactApp =  require('./views/app');
-// import { requireUserAPI, requireAdminAPI } from './middleware';
 const version = process.env.API_VERSION || '1.0'
-console.log(`API version: v${version}`)
-
+console.info(`API version: v${version}`)
 
 const routes = (app) => {
     app.use('/api/resume', require(`./api/v${version}/resume`));
