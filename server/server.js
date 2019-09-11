@@ -60,7 +60,7 @@ auth(app);
 app.use((req, res, next) => {
   if (req.user) {
     let lastVisit = req.user.visits[req.user.visits.length - 1];
-    const oneDay  = 24 * 60 * 60 * 1000;
+    const oneDay = 24 * 60 * 60 * 1000;
     let now = Date.now();
     if (Date.now() - lastVisit > oneDay) {
       req.user.visits.push(now);
@@ -73,19 +73,18 @@ app.use((req, res, next) => {
 routes(app);
 
 app.use((req, res, next) => {
-  const error = new Error(`Endpoint requested (${req.originalUrl}) not found.`);
+  const error = new Error(`Endpoint requested (${req.url.slice(4)}) not found.`);
   error.status = 404;
   next(error);
 });
 
 app.use((error, req, res, next) => {
   res.status(error.status || 500);
-  console.error(error.internal);
+  if (error.internal) console.error(error.internal);
   let payload = {
     success: false,
     error: {
-      message: error.message,
-      status: error.status
+      message: error.message
     }
   };
   res.json(payload);
