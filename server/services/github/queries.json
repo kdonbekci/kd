@@ -1,3 +1,4 @@
 {
-    "getAllRepos": "{ viewer { repositories(affiliations: [OWNER, ORGANIZATION_MEMBER, COLLABORATOR], first: 100, isFork: false, orderBy: {field: UPDATED_AT, direction: DESC}) { nodes { name id url updatedAt repositoryTopics(first: 10) { edges { node { topic { name } } } } createdAt owner { login } languages(first: 100, orderBy: {field: SIZE, direction: DESC}) { edges { size node { name color } } } } } } }"
+    "getAllRepos": "{ viewer { repositories(affiliations: [OWNER, ORGANIZATION_MEMBER, COLLABORATOR], privacy: PUBLIC, first: 100, isFork: false, orderBy: {field: UPDATED_AT, direction: DESC}) { nodes { object(expression: \"master:report.json\") { ... on Blob { text } } name id url updatedAt repositoryTopics(first: 10) { edges { node { topic { name } } } } createdAt owner { login } languages(first: 100, orderBy: {field: SIZE, direction: DESC}) { edges { size node { name color } } } } } } }"
 }
+

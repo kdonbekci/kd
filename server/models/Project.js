@@ -27,6 +27,9 @@ const ProjectSchema = new mongoose.Schema({
   },
   topics: {
     type: [String]
+  },
+  report: {
+    type: Object
   }
 });
 

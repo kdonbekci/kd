@@ -5,7 +5,7 @@ const { graphql } = require("@octokit/graphql");
 
 const mongoose = require('mongoose');
 if (!module.parent) {
-    require('dotenv').config({ path: '../../../.env' });
+    require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
     console.log('Script github/update.js is being run independently.')
     mongoose.set('useFindAndModify', false);
     mongoose.connect(`mongodb://localhost:${process.env.MONGO_PORT}/${process.env.DB_NAME}`, { useNewUrlParser: true });
@@ -38,7 +38,12 @@ const getAllRepos = () => githubAPI(queries.getAllRepos)
         repos.forEach(repo => {
             let languages = [];
             let topics = [];
+            let report;
+            if (repo.object) {
+                report = JSON.parse(repo.object.text);
+            }
             repo.owner = repo.owner.login;
+            repo.report = report;
             repo._id = repo.id;
             repo.languages.edges.forEach(language => {
                 language = { size: language.size, name: language.node.name, color: language.node.color };
@@ -49,6 +54,7 @@ const getAllRepos = () => githubAPI(queries.getAllRepos)
             }
             delete repo.repositoryTopics;
             delete repo.id;
+            delete repo.object;
             repo.topics = topics;
             repo.languages = languages;
             repos_parsed.push(repo);
