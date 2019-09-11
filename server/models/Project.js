@@ -3,12 +3,10 @@ const mongoose = require('mongoose');
 const ProjectSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    index: true,
+    unique: true
   },
   _id: String,
-  // repoId: {
-  //   type: String
-  // },
   url: {
     type: String,
     required: true

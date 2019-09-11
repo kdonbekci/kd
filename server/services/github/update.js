@@ -1,34 +1,35 @@
-require('dotenv').config({ path: '../../../.env' });
 const fs = require('fs');
-const queries = JSON.parse(fs.readFileSync('queries.json', 'utf8'));
+const path = require('path');
+const queries = JSON.parse(fs.readFileSync(path.join(__dirname, 'queries.json'), 'utf8'));
 const { graphql } = require("@octokit/graphql");
+
+const mongoose = require('mongoose');
+if (!module.parent) {
+    require('dotenv').config({ path: '../../../.env' });
+    console.log('Script github/update.js is being run independently.')
+    mongoose.set('useFindAndModify', false);
+    mongoose.connect(`mongodb://localhost:${process.env.MONGO_PORT}/${process.env.DB_NAME}`, { useNewUrlParser: true });
+    mongoose.connection
+        .once('open', () => {
+            updateRepos()
+                .then(() => {
+                    mongoose.connection.close();
+                })
+                .catch(err => {
+                    console.error(err);
+                    mongoose.connection.close();
+                })
+        })
+        .on('error', err => console.error('MongoDB error:', err));
+}
+
 const githubAPI = graphql.defaults({
     headers: {
         authorization: `token ${process.env.GITHUB_TOKEN}`
     }
 });
-const mongoose = require('mongoose');
-mongoose.set('useFindAndModify', false);
-mongoose.connect(`mongodb://localhost:${process.env.MONGO_PORT}/${process.env.DB_NAME}`, {useNewUrlParser: true});
+
 let Project = require('../../models/Project');
-mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
-mongoose.connection
-    .once('open', () => {
-        getAllRepos()
-            .then(repos => {
-                console.info('Fetched repos from GitHub');
-                return updateDatabse(repos);
-            })
-            .then((projects) => {
-                console.info('Updated MongoDB');
-                mongoose.connection.close();
-            })
-            .catch(err => {
-                console.error(err);
-                mongoose.connection.close();
-            })
-    })
-    .on('error', err => console.error('MongoDB error:', err));
 
 const getAllRepos = () => githubAPI(queries.getAllRepos)
     .then(res => { return res.viewer.repositories.nodes; })
@@ -52,14 +53,30 @@ const getAllRepos = () => githubAPI(queries.getAllRepos)
             repo.languages = languages;
             repos_parsed.push(repo);
         });
+        console.info('(1/2) Fetched repos from GitHub');
         return repos_parsed;
     });
 
 const updateDatabse = (repos) => {
     promises = []
     repos.forEach(project => {
-        query = {_id: project._id};
-        promises.push(Project.findOneAndUpdate(query, project, {upsert:true}));
+        query = { _id: project._id };
+        promises.push(Project.findOneAndUpdate(query, project, { upsert: true }));
     });
     return Promise.all(promises)
 }
+
+const updateRepos = () => {
+    console.info('Began updating the projects...')
+    return getAllRepos()
+        .then(updateDatabse)
+        .then(repos => {
+            console.info('(2/2) Updated the projects on MongoDB.');
+            return;
+        })
+        .catch(err => {
+            throw err;
+        });
+}
+
+module.exports = updateRepos

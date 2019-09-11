@@ -9,10 +9,10 @@ const routes = (app) => {
     app.use('/api/projects', require(`./api/v${version}/projects`));
     app.use('/api/user', require(`./api/v${version}/user`));
     app.get('/', (req, res) => {
-        res.send('home')
-    });
-    app.get('*', (req, res) => {
-        res.send('invalid endpoint')
+        let payload = {
+            success: true
+        }
+        res.status(200).json(payload);
     });
 };
 
