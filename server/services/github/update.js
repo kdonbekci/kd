@@ -31,7 +31,7 @@ const githubAPI = graphql.defaults({
 
 let Project = require('../../models/Project');
 
-const getAllRepos = () => githubAPI(queries.getAllRepos)
+const getAllRepos = () => githubAPI(queries.getRepos)
     .then(res => { return res.viewer.repositories.nodes; })
     .then(repos => {
         let repos_parsed = [];
@@ -39,8 +39,11 @@ const getAllRepos = () => githubAPI(queries.getAllRepos)
             let languages = [];
             let topics = [];
             let report;
+            if (repo.owner.login != 'kdonbekci'){
+                return;
+            }
             if (repo.object) {
-                report = JSON.parse(repo.object.text);
+                report = repo.object.text;
             }
             repo.owner = repo.owner.login;
             repo.report = report;
@@ -59,7 +62,7 @@ const getAllRepos = () => githubAPI(queries.getAllRepos)
             repo.languages = languages;
             repos_parsed.push(repo);
         });
-        console.info('(1/2) Fetched repos from GitHub');
+        console.info(`(1/2) Fetched ${repos_parsed.length} repos from GitHub`);
         return repos_parsed;
     });
 

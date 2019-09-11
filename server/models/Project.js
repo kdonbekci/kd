@@ -29,7 +29,8 @@ const ProjectSchema = new mongoose.Schema({
     type: [String]
   },
   report: {
-    type: Object
+    type: String,
+    default:'## Oops \n\n I have not created a report for this project yet.'
   }
 });
 

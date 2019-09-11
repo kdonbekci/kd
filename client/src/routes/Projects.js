@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Sidebar } from '../components/layout';
 import { Redirect } from 'react-router-dom';
+import { prettyProject } from '../helpers/prettyNames';
+
 import axios from 'axios';
 
 class Projects extends Component {
@@ -72,7 +74,7 @@ class Projects extends Component {
                 }} />
                 :
                 <Fragment>
-                    <Sidebar items={this.state.projects} />
+                    <Sidebar url='projects' pretty ={prettyProject}  items={this.state.projects} />
                     <section id='body'>
                         {body}
                     </section>
