@@ -1,1 +1,2 @@
-# kd: my personal website
+# KD: My Personal Website
+

@@ -1,17 +1,17 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
+import '../../../style/style.css';
 
 const Nav = (props) => {
 
     return (
         <section id='nav'>
-            <h1>Nav</h1>
+            <div id='nav-main'>
+                <NavLink key='home' to='/' exact activeClassName='nav-selected'>
+                    Kaan Dönbekci
+                </NavLink>
+            </div>
             <ul>
-                <li id='main' className='nav-item'>
-                    <NavLink key='home' to='/' activeClassName='nav-selected'>
-                        Kaan Donbekci
-                    </NavLink>
-                </li>
                 <li className='nav-item'>
                     <NavLink key='projects' to='/projects' activeClassName='nav-selected'>
                         Projects

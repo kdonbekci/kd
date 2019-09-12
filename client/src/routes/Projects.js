@@ -2,8 +2,11 @@ import React, { Component, Fragment } from 'react';
 import { Sidebar } from '../components/layout';
 import { Redirect } from 'react-router-dom';
 import { prettyProject } from '../helpers/prettyNames';
+import { PieChart } from '../components/plotting';
+import Counter from '../helpers/counter';
 
 import axios from 'axios';
+import { timeSince } from '../helpers/prettyDates';
 
 class Projects extends Component {
     constructor(props) {
@@ -24,6 +27,7 @@ class Projects extends Component {
                 this.generateOverview();
             })
             .catch((err) => {
+                console.error(err);
                 const payload = err.response.data;
                 const status = err.response.status;
                 this.setState({
@@ -35,11 +39,14 @@ class Projects extends Component {
 
     generateOverview() {
         const projects = this.state.projects;
-        const topics = {}
+        let topics = []
         const languages = {}
-        const lastUpdated = { project: null, when: null };
-        let totalLines = 0;
+        const lastUpdated = {
+            name: projects[0].name,
+            when: timeSince(projects[0].updatedAt)
+        };
         projects.forEach(project => {
+            topics.push(project.topics);
             project.languages.forEach(language => {
                 if (languages[language.name]) {
                     languages[language.name].size += language.size
@@ -47,25 +54,29 @@ class Projects extends Component {
                     languages[language.name] = {
                         size: language.size,
                         color: language.color,
+                        name: language.name
                     }
                 }
             });
         });
-        console.log(languages);
+        const plotData = Object.values(languages);
+        topics = [].concat(...topics);
+        const topicsCounter = Counter(topics);
+        console.log(topicsCounter)
+        const overview = (
+            <Fragment>
+                <h1>Projects</h1>
+                <p><span className='tip'>Tip: You can expand the projects on the sidebar.</span> <br />
+                    Here is some overview about my projects. <br />
+                </p>
+            </Fragment>
+        )
+        this.setState({overview});
+
+
     }
 
     render() {
-        let body;
-        if (!this.redirect) {
-            body = (
-                <Fragment>
-                    <h1>Projects</h1>
-                    <p><span className='tip'>Tip: You can expand the projects on the sidebar.</span> <br />
-                        Here is some overview about my projects. <br />
-                    </p>
-                </Fragment>
-            )
-        }
         return (
             this.state.redirect ?
                 <Redirect to={{
@@ -74,9 +85,11 @@ class Projects extends Component {
                 }} />
                 :
                 <Fragment>
-                    <Sidebar url='projects' pretty ={prettyProject}  items={this.state.projects} />
                     <section id='body'>
-                        {body}
+                        <Sidebar url='projects' pretty={prettyProject} items={this.state.projects} />
+                        <section id='content'>
+                            {this.state.overview}
+                        </section>
                     </section>
                 </Fragment>
         );
