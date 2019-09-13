@@ -8,19 +8,21 @@ function App() {
   return (
     <Fragment>
       <Router>
+        {/* <layout.Header /> */}
         <layout.Nav />
-        <Switch>
-          <Route path='/' exact component={routes.Home} />
-          <Route path='/contact' component={routes.Contact} />
-          <Route path='/projects' exact component={routes.Projects} />
-          <Route path='/projects/:id' exact component={routes.SingleProject} />
-          <Route path='/education' component={routes.Education} />
-          <Route path='/resume' component={routes.Resume} />
-          <Route path='/stats' component={routes.Stats} />
-          
-          <Route path='/internal-error' component={routes.InternalError} />
-          <Route path='/' component={routes.NotFound} />
-        </Switch>
+        <main>
+          <Switch>
+            <Route path='/' exact component={routes.Home} />
+            <Route path='/contact' component={routes.Contact} />
+            <Route path='/projects' exact component={routes.Projects} />
+            <Route path='/projects/:id' component={routes.SingleProject} />
+            <Route path='/education' component={routes.Education} />
+            <Route path='/resume' component={routes.Resume} />
+            <Route path='/stats' component={routes.Stats} />
+            <Route path='/internal-error' component={routes.InternalError} />
+            <Route path='/' component={routes.NotFound} />
+          </Switch>
+        </main>
       </Router>
       <layout.Footer />
     </Fragment>

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import { BioSidebar } from '../components/layout'
 
 class Stats extends Component {
     constructor(props) {
@@ -15,7 +16,12 @@ class Stats extends Component {
 
     render() {
         return (
-            <h1>Stats page</h1>
+            <Fragment>
+                <BioSidebar />
+                <section id='content'>
+                    <h1>Stats page</h1>
+                </section>
+            </Fragment>
         );
     }
 }

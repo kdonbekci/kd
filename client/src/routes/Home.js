@@ -1,19 +1,22 @@
 import React, { Component, Fragment } from 'react';
-import '../style/style.css';
+import { BioSidebar } from '../components/layout';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+
         };
     }
 
     render() {
         return (
-            <section id='body'>
-                <h1>Home page</h1>
-            </section>
+            <Fragment>
+                <BioSidebar />
+                <section id='content'>
+                    <h1>Home page</h1>
+                </section>
+            </Fragment>
         );
     }
 }

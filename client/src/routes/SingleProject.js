@@ -1,66 +1,65 @@
 import React, { Component, Fragment } from 'react';
-import { Sidebar, CollapsedSidebar } from '../components/layout';
-import Markdown from 'react-markdown';
-import { timeSince } from '../helpers/prettyDates';
-import {StackedBarChart} from '../components/plotting';
+import { ProjectsSidebar } from '../components/layout';
+import { getAllProjects, getProjectByName } from '../helpers/api';
 import Project from '../components/project/Project'
-// import * as d3 from "d3";
 
 import axios from 'axios';
 
 class SingleProject extends Component {
     constructor(props) {
+        console.log('SingleProject constructor');
         super(props);
-        this.state = { error: null, redirect: null, ...props.location.state }
+
+        this.state = {
+            error: null,
+            redirect: null,
+            ...this.props.location.state //seed data for the newly created component.
+        }
     };
 
     componentDidMount() {
-        if (!this.state.project) {
-            const projectName = this.props.match.params.id;
-            axios.get(`/projects/${projectName}`)
-                .then(res => {
-                    const payload = res.data;
-                    if (!payload.success) throw Error;
-                    this.setState({ project: payload.data });
-                    this.drawChart();
+        console.log('SingleProject componentDidMount');
+        if (!this.state.projects) {
+            getAllProjects()
+                .then(projects => {
+                    this.setState({ projects });
                 })
-                .catch(err => {
-                    const payload = err.response.data;
-                    const status = err.response.status;
-                    this.setState({
-                        redirect: status == 404 ? '/not-found' : '/internal-error',
-                        error: payload.error
-                    })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
+        if (!this.state.project) {
+            const name = this.props.match.params.id
+            getProjectByName(name)
+                .then(project => {
+                    this.setState({ project });
+                })
+                .catch((err) => {
+                    console.error(err);
                 });
         }
     }
 
+    static getDerivedStateFromProps(props, state) {
+        console.log('SingleProject getDerivedStateFromProps', props, state)
+        if (props.location.state && state.project) {
+            if (props.location.state.project &&  state.project.name != props.location.state.project.name){
+                return {project: props.location.state.project}
+            }
+        }
+        return null
+    }
+
     render() {
-        const project = this.state.project
+        console.log('SingleProject render');
         return (
             <Fragment>
-                <CollapsedSidebar />
-                <section id='body'>
-                    <h1 id='title'>{project.name}</h1>
-                    <div id='subtitle'>
-                        <ul>
-                            <span id='time-related'>
-                                <li>{`Last updated ${timeSince(project.updatedAt)} ago.`}</li>
-                                <li>{`Created ${timeSince(project.createdAt)} ago.`}</li>
-                            </span>
-                            <span id='languages'>
-                                <StackedBarChart data={project.languages}/>
-                            </span>
-                        </ul>
-                    </div>
-                    <div id='report'>
-                        <Markdown source={project.report} />
-                    </div>
+                <ProjectsSidebar projects={this.state.projects} />
+                <section id='content'>
+                    <Project project={this.state.project} />
                 </section>
             </Fragment>
         );
-
-
     }
 };
 

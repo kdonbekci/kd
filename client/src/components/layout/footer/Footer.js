@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 
+
 const Footer = (props) => {
     const social = {
         github: {
@@ -19,17 +20,16 @@ const Footer = (props) => {
             icon: <i className="far fa-envelope-open"></i>
         }
     }
-    const socialKeys = ['github', 'facebook', 'linkedin', 'mail']
+    const socialKeys = ['github', 'linkedin', 'facebook', 'mail']
 
     return (
-        <section id='footer'>
-            <h1>Footer</h1>
-            <ul id='social'>
+        <footer id='footer'>
+            <ul id='social-list'>
                 {
                     socialKeys.map(key => {
                         return (
-                            <li key={key}>
-                                <a href={social[key].link}>
+                            <li className='social-item' key={key}>
+                                <a target="_blank" rel="noopener noreferrer" href={social[key].link}>
                                     {social[key].icon}
                                 </a>
                             </li>
@@ -37,7 +37,8 @@ const Footer = (props) => {
                     })
                 }
             </ul>
-        </section>
+            <p id='copyright-notice'>&copy; Kaan Dönbekci 2019</p>
+        </footer>
     );
 };
 
