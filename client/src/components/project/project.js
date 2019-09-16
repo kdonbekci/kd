@@ -4,23 +4,35 @@ import { timeSince } from '../../helpers/prettyDates';
 
 const Project = (props) => {
     const project = props.project;
-
+    let totalBytes = 0
+    if (project) {
+        project.languages.forEach(l => {
+            totalBytes += l.size
+        });
+    }
     return (
-        <Fragment>
-            <div id='time-info'>
-                <ul>
-                    <span id='time-related'>
-                        <li>{`Last updated ${project && timeSince(project.updatedAt)} ago.`}</li>
-                        <li>{`Created ${project && timeSince(project.createdAt)} ago.`}</li>
-                    </span>
-                    <span id='languages'>
-                    </span>
-                </ul>
-            </div>
-            <div id='report'>
-                <Markdown source={project && project.report} />
-            </div>
-        </Fragment>
+        project ?
+            <Fragment>
+                <h1 id='project-title'> {project.name} </h1>
+                <div>
+                    <ul id='time-info'>
+                        <li>{`Last updated ${timeSince(project.updatedAt)} ago.`}</li>
+                        <li>{`Created ${timeSince(project.createdAt)} ago.`}</li>
+                        <li> <a target="_blank" rel="noopener noreferrer" href={project.url} id='project-link'> View on GitHub</a>
+                        </li>
+                    </ul>
+                    <ul id='languages'>
+                        {project.languages.map((language, i) => {
+                            return <li key={i}>{language.name}: {(100 * language.size / totalBytes).toFixed(1)}% </li>
+                        })}
+                    </ul>
+                    <div className="clear"></div>
+                </div>
+                <div id='report'>
+                    <Markdown source={project.report} />
+                </div>
+            </Fragment> :
+            null
     );
 }
 

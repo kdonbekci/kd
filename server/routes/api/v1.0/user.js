@@ -12,10 +12,7 @@ router.get('/auth/callback', passport.authenticate('google', {
 
 router.get('/', (req, res, next) => {
   if(!req.user) { 
-    let error = new Error('You need to be logged in to view here.');
-    error.status = 401;
-    error.redirect = '/user/login';
-    return next(error);
+    res.status(200).json({ success: true, data: null});
   }
   let payload = {sucess: true, data: req.user};
   res.status(200).json(payload);

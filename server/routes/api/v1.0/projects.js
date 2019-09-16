@@ -6,8 +6,8 @@ const updateProjects = require('../../../services/github/update');
 
 router.get('/', (req, res, next) => {
   Project.find({})
-    .limit(10)
-    .sort({ updatedAt: -1 })
+    .limit(20)
+    .sort({ createdAt: -1 })
     .then(projects => {
       payload = { success: true, data: projects };
       res.status(200).json(payload);

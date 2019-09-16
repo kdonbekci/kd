@@ -3,12 +3,23 @@
 * {
     padding: 0;
     margin: 0;
-    /* border: 1px solid darkgray; */
-    /* vertical-align: baseline; */
+    box-sizing: border-box;
 }
 
 body {
     min-height: 100vh;
+}
+
+h1 {
+    font-size: 36px
+}
+
+h2 {
+    font-size: 24px
+}
+
+p {
+    font-size: 20px
 }
 
 a {
@@ -20,6 +31,11 @@ a:hover {
     color: #f00;
 }
 
+button {
+    width: 80px;
+    height: 30px;
+}
+
 li {
     list-style: none;
 }
@@ -27,8 +43,6 @@ li {
 #body {
     height: 100%;
     font-size: 20px;
-    /* display: flex; */
-    /* flex-direction: column; */
 }
 
 /* HEADER */
@@ -41,7 +55,6 @@ li {
     flex: auto;
     text-align: center;
     border-right: 1px solid #aaa;
-    /* border-bottom: 1px solid #aaa ; */
 }
 
 .navbar-selected {
@@ -52,6 +65,7 @@ li {
     font-size: 30px;
     margin-left: 10px;
     margin: 5px 0;
+    flex-shrink: 0;
 }
 
 .navbar-item a {
@@ -66,12 +80,10 @@ li {
     border-bottom: 1px solid #aaa;
     box-sizing: border-box;
     z-index: 1;
-    
 }
 
 #navbar-list {
     display: flex;
-    /* margin: 0 auto; */
     height: 100%;
 }
 
@@ -82,54 +94,94 @@ li {
 /* MAIN */
 
 main {
-    /* padding-top: 50px; */
     display: flex;
     position: absolute;
     width: 100%;
     height: 100%;
-    padding: 50px 5% 0px 5%;
-    /* margin-bottom: 50px; */
+    padding: 50px 5% 0 0;
     box-sizing: border-box;
-    /* display: block; */
-    /* align-self: center; */
-    /* justify-content: center; */
+}
+
+.clear {
+    clear: both;
 }
 
 #content {
-    /* width: 80%; */
-    /* position: absolute; */
-    /* display:inline; */
-    /* left: 160px; */
+    display: block;
+    width: 100%;
+    margin: 50px;
+    line-height: 30px;
 }
+
+#time-info {
+    display: inline-block;
+}
+
+#languages {
+    float: right;
+    /* display: inline-block */
+}
+
+p a {
+    text-decoration: underline
+}
+
+#report {
+    margin-top: 10px
+}
+
+
+
 
 /* SIDEBAR */
 
 aside {
     height: 100%;
-    width: 300px;
+    width: 350px;
     overflow-x: hidden;
     border-right: 1px solid #aaa;
-    padding-right: 10px;
-    margin-right: 10px;
+    padding-right: 30px;
+    padding-top: 30px;
+    margin-left: 30px
 }
 
 .sidebar-selected {
     color: #b00;
 }
 
+.project-link {
+    display: inline-block;
+    width: 150px;
+}
+
+.topic-icons {
+    display: inline-block;
+    left: 5px;
+}
+
+.topic-icon {
+    display: inline-block;
+    margin: 0 3px 0 3px;
+}
+
+.topic-icon:first-child {
+    margin: 0 3px 0 0;
+}
+
+.topic-icon:last-child {
+    margin: 0 0 0 3px;
+}
+
+.topic-icon:only-child {
+    margin: 0;
+}
+
+#projects-sidebar {
+    line-height: 30px;
+}
+
 #bio-sidebar {
     align-content: center;
-}
-
-#photo-button {
-    display: block;
-    margin: auto;
-    /* width: 30%; */
-}
-
-button {
-    width: 80px;
-    height: 30px;
 }
 
 #my-photo {
@@ -137,10 +189,6 @@ button {
     width: 100%;
     border-radius: 50%;
     box-sizing: border-box;
-}
-
-#bio-sidebar a {
-    text-decoration: underline;
 }
 
 #bio-sidebar p {
@@ -158,7 +206,7 @@ footer {
     flex-direction: column;
     align-items: center;
     height: 40px;
-    padding: 5px 0
+    margin: 5px 0
 }
 
 .social-item {
@@ -170,10 +218,8 @@ footer {
     display: flex;
     justify-content: space-between;
     list-style: none;
-    /* flex-basis: 200px; */
     width: 200px;
     flex-shrink: none;
-    /* padding-bottom: px; */
 }
 
 #copyright-notice {
@@ -181,60 +227,3 @@ footer {
     color: #aaa;
     font-size: 14px;
 }
-
-/* #nav {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    display: flex;
-    background-color: white;
-    border-bottom: 1px solid #f6f6f6;
-    padding: 0px 10px;
-}
-
-#nav li {
-    list-style: none;
-    display: inline-block;
-    height: 60px;
-    padding: 0px 15px;
-    text-decoration: none;
-    color: lightslategray;
-}
-
-#nav li a {
-    line-height: 60px;
-}
-
-#nav-main {
-    color: #000 !important;
-    display: inline-block;
-    padding: 0px 20px;
-    font-size: 30px;
-    text-decoration: none;
-    line-height: 60px;
-
-}
-
-.nav-selected {
-    text-decoration: underline solid black;
-}
-
-#body {
-    margin-top: 70px;
-    height: 90vh;
-}
-
-#sidebar {
-    width: 400px;
-    height: inherit;
-    position: fixed;
-    background-color: #fff;
-    
-}
-
-#content {
-    height: inherit;
-    margin-left: 400px;
-    padding: 0px 30px;
-} */

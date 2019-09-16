@@ -29,9 +29,8 @@ class BioSidebar extends Component {
             <section id='bio-sidebar-intro'>
                 <img id='my-photo' src={`${process.env.PUBLIC_URL}/images/${this.state.activePhoto}`}
                     alt='my photo' />
-                <button id='photo-button' onClick={this.buttonHandler}> Next Photo! </button>
                 <p>Hello there, <br /> <br />
-                    I am Kaan and I love all things data. <br /> <br />
+                    I'm Kaan and I love all things data. <br /> <br />
                     I <NavLink to='/projects/kd' >built this website</NavLink> to anounce
                 and demonstrate my affection to data. <br /> <br />
                     I will be <NavLink to='/education' >graduating this winter</NavLink> from Stanford

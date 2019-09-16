@@ -7,7 +7,7 @@ const Nav = (props) => {
             <ul id='navbar-list'>
                 <li className='navbar-item'>
                     <NavLink key='home' to='/' exact activeClassName='navbar-selected'>
-                        Kaan Dönbekci
+                        Kaan Donbekci
                 </NavLink>
                 </li>
                 <li className='navbar-item'>
@@ -25,11 +25,11 @@ const Nav = (props) => {
                         Resume
                     </NavLink>
                 </li>
-                <li className='navbar-item'>
+                {/* <li className='navbar-item'>
                     <NavLink key='stats' to='/stats' activeClassName='navbar-selected'>
                         Stats
                     </NavLink>
-                </li>
+                </li> */}
                 <li className='navbar-item'>
                     <NavLink key='contact' to='/contact' activeClassName='navbar-selected'>
                         Contact

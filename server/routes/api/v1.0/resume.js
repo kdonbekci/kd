@@ -2,16 +2,25 @@ const express = require('express')
 const router = express.Router()
 const path = require('path');
 const updateResume = require('../../../services/gdrive/update');
+const fs = require("fs");
 
 router.get('/', (req, res, next) => {
-  if (!req.user) {
-    let error = new Error('You need to be logged in to view resume.');
-    error.internal = 'Client attempted to view resume without login';
-    error.status = 401;
-    error.redirect = '/login';
-    return next(error);
-  }
-  res.download(path.join(__dirname, '../../../protected/CV_KaanDonbekci.pdf'), err => {
+  // if (!req.user) {
+  //   let error = new Error('You need to be logged in to view resume.');
+  //   error.internal = 'Client attempted to view resume without login';
+  //   error.status = 401;
+  //   error.redirect = '/login';
+  //   return next(error);
+  // }
+  const file = path.join(__dirname, '../../../protected/KaanDonbekci_Resume.pdf');
+  // fs.readFile(file, function (err, data) {
+  //   res.contentType("application/pdf");
+  //   res.send(data)
+  // })
+
+  // file.pipe(res);
+
+  res.download(file, err => {
     if(err) {
       let error = new Error('Failed to transfer resume pdf.');
       error.status = 500;

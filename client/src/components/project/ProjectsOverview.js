@@ -1,13 +1,31 @@
 import React, { Fragment } from 'react';
 import { timeSince } from '../../helpers/prettyDates';
+import icons from '../../helpers/icons';
 
 const ProjectsOverview = (props) => {
     return (
         <Fragment>
-            <h1>ProjectsOverview</h1>
+            <p id='project-overview'>
+                Feel free to browse through my projects on the sidebar. <br />
+                They are ranked based on creation time. <br />
+                The icons next to them hint to their topics.
+                </p>
+            <br/>
+            <div className='topic-icons'>
+                {Object.keys(icons).sort().map((topic, i) => {
+                    return (
+                        <div key={i} className='topic-icon-help'>
+                            <p>
+                            <i className={icons[topic]} title={topic} />
+                            : {topic}</p>
+                        </div>
+                    )
+                })}
+            </div>
         </Fragment>
     );
 }
+
 
 // const generateOverview = (projects) => {
 //     let topics = []

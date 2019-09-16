@@ -25,7 +25,7 @@ class Projects extends Component {
                     this.setState({ projects });
                     // this.generateOverview();
                 })
-                .catch((err) => {
+                .catch(err => {
                     console.error(err);
                     // this.setState({
                     //     redirect: status == 404 ? '/not-found' : '/internal-error',
