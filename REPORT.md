@@ -1,2 +1,6 @@
-# KD: My Personal Website
+# Goals:
 
+# Approach:
+
+
+# Outcome:

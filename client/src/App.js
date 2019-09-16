@@ -20,10 +20,10 @@ class App extends Component {
 
 
   render() {
-    const context = {
-      user: this.state.user,
-      setUser: this.setUser
-    }
+    // const context = {
+    //   user: this.state.user,
+    //   setUser: this.setUser
+    // }
     return (
       <Fragment>
         <Router>
