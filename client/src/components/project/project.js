@@ -28,9 +28,17 @@ const Project = (props) => {
                     </ul>
                     <div className="clear"></div>
                 </div>
-                <div id='report'>
-                    <Markdown source={project.report} />
-                </div>
+                {project.fallbackToReadme ?
+                    <div id='report'>
+                        <Markdown source={project.report} />
+                        <p>Will show the README file instead...</p>
+                        <Markdown source={project.readme} />
+                    </div> :
+                    <div id='report'>
+                        <Markdown source={project.report} />
+                    </div>
+                }
+
             </Fragment> :
             null
     );

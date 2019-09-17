@@ -1,6 +1,5 @@
-const fs = require('fs');
-const path = require('path');
-const queries = JSON.parse(fs.readFileSync(path.join(__dirname, 'queries.json'), 'utf8'));
+    const path = require('path');
+const queries = require('./queries');
 const { graphql } = require("@octokit/graphql");
 
 const mongoose = require('mongoose');
@@ -39,14 +38,25 @@ const getAllRepos = () => githubAPI(queries.getRepos)
             let languages = [];
             let topics = [];
             let report;
+            let readme;
             if (repo.owner.login != 'kdonbekci'){
                 return;
             }
-            if (repo.object) {
-                report = repo.object.text;
+            // console.log(repo);
+            if (repo.first) {
+                report = repo.first.text;
+                if(report) {
+                    repo.report = report;
+                    repo.fallbackToReadme = false;
+                }
+            }
+            if (repo.second) {
+                readme = repo.second.text;
+                if(readme) {
+                    repo.readme = readme;
+                }
             }
             repo.owner = repo.owner.login;
-            repo.report = report;
             repo._id = repo.id;
             repo.languages.edges.forEach(language => {
                 language = { size: language.size, name: language.node.name, color: language.node.color };
