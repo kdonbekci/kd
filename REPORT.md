@@ -4,7 +4,7 @@
 3. Maintain the wesbite with as little effort as possible.
 
 ## Approach:
-In order to keep the website low-maintenance, I decided to first: 
+In order to keep the website low-maintenance, I decided to first:  
 create a backend server that communicates with GitHub and 
 I picked React library to design my frontend due 
 
