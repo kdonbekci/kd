@@ -39,9 +39,7 @@ button {
     height: 30px;
 }
 
-li {
-    list-style: none;
-}
+li {}
 
 #body {
     height: 100%;
@@ -75,6 +73,10 @@ li {
 
 .navbar-item a {
     text-decoration: none;
+}
+
+#navbar li {
+    list-style: none;
 }
 
 #navbar {
@@ -132,11 +134,8 @@ main {
 }
 
 #report {
-    margin-top: 10px
+    margin-top: 50px
 }
-
-
-
 
 /* SIDEBAR */
 

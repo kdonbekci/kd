@@ -75,17 +75,13 @@ const updateDatabse = (repos) => {
     return Promise.all(promises)
 }
 
-const updateRepos = () => {
-    console.info('Began updating the projects...')
-    return getAllRepos()
-        .then(updateDatabse)
-        .then(repos => {
-            console.info('(2/2) Updated the projects on MongoDB.');
-            return;
-        })
-        .catch(err => {
-            throw err;
-        });
+const updateRepos = async () => {
+    console.info('Began updating the projects...');
+    let repos = await getAllRepos();
+    await mongoose.connection.db.dropCollection('projects');
+    repos = await updateDatabse(repos);
+    console.info('(2/2) Updated the projects on MongoDB.');
+    return;
 }
 
 module.exports = updateRepos
