@@ -134,7 +134,8 @@ main {
 }
 
 #report {
-    margin-top: 50px
+    margin-top: 30px;
+    padding-bottom: 30px;
 }
 
 /* SIDEBAR */
@@ -208,6 +209,7 @@ aside {
 
 footer {
     position: fixed;
+    background-color: #fff;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -215,7 +217,7 @@ footer {
     flex-direction: column;
     align-items: center;
     height: 40px;
-    margin: 5px 0
+    margin: 5px 0 0 0
 }
 
 .social-item {
