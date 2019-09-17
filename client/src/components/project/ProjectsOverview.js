@@ -7,7 +7,7 @@ const ProjectsOverview = (props) => {
         <Fragment>
             <p id='project-overview'>
                 Feel free to browse through my projects on the sidebar. <br />
-                They are ranked based on creation time. <br />
+                They are sorted based on creation time. <br />
                 The icons next to them hint to their topics.
                 </p>
             <br/>

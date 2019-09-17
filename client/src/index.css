@@ -4,6 +4,9 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "Raleway";
+    /* font-family: 'Times New Roman', Times, serif; */
+    /* font-family: Arial, Helvetica, sans-serif */
 }
 
 body {
@@ -62,10 +65,12 @@ li {
 }
 
 .navbar-item:first-child {
+    width: 330px;
     font-size: 30px;
     margin-left: 10px;
     margin: 5px 0;
     flex-shrink: 0;
+    flex-grow: 0;
 }
 
 .navbar-item a {
@@ -110,7 +115,7 @@ main {
     display: block;
     width: 100%;
     margin: 50px;
-    line-height: 30px;
+    line-height: 40px;
 }
 
 #time-info {
@@ -123,7 +128,7 @@ main {
 }
 
 #content a {
-    text-decoration: underline
+    text-decoration: underline dotted;
 }
 
 #report {
@@ -136,13 +141,15 @@ main {
 /* SIDEBAR */
 
 aside {
+    flex-shrink: 0;
     height: 100%;
-    width: 350px;
+    width: 300px;
     overflow-x: hidden;
     border-right: 1px solid #aaa;
     padding-right: 30px;
     padding-top: 30px;
-    margin-left: 30px
+    margin-left: 30px;
+    margin-top: 5px;
 }
 
 .sidebar-selected {

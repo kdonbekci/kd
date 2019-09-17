@@ -10,8 +10,7 @@ const Contact = (props) => {
                     
                     You can get in touch with me via <a target="_blank" rel="noopener noreferrer" href='mailto:kdonbekci@gmail.com'>
                         email
-                    </a>
-                    .
+                    </a> or my socials below in the footer.
                 </p>
             </section>
         </Fragment>

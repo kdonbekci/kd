@@ -10,7 +10,7 @@ const Education = (props) => {
                 <br/>
                 <h2>Stanford University</h2>
                 <p>September 2016 - January 2020</p> 
-                <p>Bachelor of Science in Symbolic Systems (Artifical Intelligence track)</p>
+                <p>Bachelor of Science in <a target="_blank" rel="noopener noreferrer" href='https://symsys.stanford.edu/'>Symbolic Systems</a> (Artifical Intelligence track)</p>
                 <p>Minor in Biology</p>
                 <br/>
                 <h2>Harvard University</h2>
