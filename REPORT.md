@@ -2,7 +2,7 @@
 1. Create a website for online presence where I can demonstrate my projects.
 2. Familiarize myself with web development.
 3. Maintain the wesbite with as little effort as possible.
-\n
+
 ## Approach:
 In order to keep the website low-maintenance, I decided to:
 

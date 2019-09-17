@@ -151,6 +151,14 @@ aside {
     margin-top: 5px;
 }
 
+aside li {
+    list-style: none;
+}
+
+aside nav {
+    position:fixed;
+}
+
 .sidebar-selected {
     color: #b00;
 }
@@ -216,8 +224,9 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 40px;
-    margin: 5px 0 0 0
+    border-top: 1px solid #aaa;
+    height: 50px;
+    padding: 5px 0 5px 0
 }
 
 .social-item {
