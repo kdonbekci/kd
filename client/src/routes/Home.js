@@ -24,7 +24,7 @@ class Home extends Component {
                         My interests lay in health, psychology, and finance. <br />
                         You can find some projects I have been working on <a href='/projects'>here.</a> <br />
                         My favorite show is Planet Earth II (<a target="_blank" rel="noopener noreferrer" href='https://www.youtube.com/watch?v=Rv9hn4IGofM'>best part</a>).<br />
-                        And please don't hesitate to <a href='/projects'>get in touch.</a>!
+                        And please don't hesitate to <a href='/contact'>get in touch.</a>!
                     </p>
 
                 </section>
