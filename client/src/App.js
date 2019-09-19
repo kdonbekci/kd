@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import * as routes from './routes';
 import * as layout from './components/layout';
 // import { UserContext } from './helpers/contexts';
@@ -26,7 +26,7 @@ class App extends Component {
     // }
     return (
       <Fragment>
-        <Router>
+        <Router basename='/'>
           {/* <UserContext.Provider value={context}> */}
           <layout.Nav />
           <main>
