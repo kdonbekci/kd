@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://kdonbekci.github.io/kd",
+  "homepage": "https://kaandonbekci.com",
   "dependencies": {
     "axios": "^0.19.0",
     "font-awesome": "^4.7.0",
