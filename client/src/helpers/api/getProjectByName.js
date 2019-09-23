@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const getProjectByName = async (name) => {
-    console.log('-API- getProjectByName called')
+    if(process.env.NODE_ENV == 'development') console.log('-API- getProjectByName called');
     const res = await axios.get(`${process.env.REACT_APP_API}/projects/${name}`);
     const payload = await res.data;
     if (!payload.success){

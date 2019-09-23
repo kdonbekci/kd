@@ -19,11 +19,6 @@ class BioSidebar extends Component {
         // this.generateContent();
     }
 
-    buttonHandler = (e) => {
-        console.log(e);
-    }
-
-
     render() {
         const content = (
             <section id='bio-sidebar-intro'>
