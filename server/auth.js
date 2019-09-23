@@ -2,16 +2,15 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const User = require('./models/User')
 
-const port = process.env.NODE_PORT;
-const hostname = process.env.NODE_ENV == 'development' ? `http://localhost:${port}` : process.env.HOSTNAME;
+const hostname = process.env.HOSTNAME;
 
 const auth = (app) => {
   app.use(passport.initialize());
   app.use(passport.session());
   
   passport.use(new GoogleStrategy({
-    clientID: process.env.NODE_ENV=='development' ? process.env.GOOGLE_CLIENT_ID_DEV: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.NODE_ENV=='development' ? process.env.GOOGLE_CLIENT_SECRET_DEV: process.env.GOOGLE_CLIENT_SECRET,
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: `${hostname}/api/user/auth/callback`,
     userProfileURL: 'https://www.googleapis.com/oauth2/v3/userinfo',
     scope: ['email']

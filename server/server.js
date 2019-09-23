@@ -1,5 +1,6 @@
-require('dotenv').config({ path: '../.env' })
+process.env.NODE_ENV = 'development';
 
+require('dotenv').config({path: `./.env.${process.env.NODE_ENV}`});
 const express = require('express');
 const redis = require('redis')
 const mongoose = require('mongoose');
@@ -9,14 +10,14 @@ const compression = require('compression');
 const session = require('express-session');
 const morgan = require('morgan');
 const fs = require('fs');
+const cors = require('cors')
 const path = require('path');
 
 const routes = require('./routes');
 const auth = require('./auth')
 
-const env = process.env.NODE_ENV || 'development';
-
 const app = express();
+app.use(cors());
 
 let RedisStore = require('connect-redis')(session);
 let redisClient = redis.createClient({
@@ -95,6 +96,6 @@ if (!module.parent) {
     if (err) {
       console.error('Node error:', err);
     }
-    console.info(`Started in ${env === 'development' ? env : 'production'} mode on port ${process.env.NODE_PORT}.`);
+    console.info(`Started in ${process.env.NODE_ENV} mode on port ${process.env.NODE_PORT}.`);
   });
 }

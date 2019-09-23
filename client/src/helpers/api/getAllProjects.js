@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const getAllProjects = async () => {
     console.log('-API- getAllProjects called')
-    const res = await axios.get('/projects');
+    console.log(process.env);
+    const res = await axios.get(`${process.env.REACT_APP_API}/projects`);
     const payload = await res.data;
     if (!payload.success){
         throw Error;
