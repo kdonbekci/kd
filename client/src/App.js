@@ -24,7 +24,6 @@ class App extends Component {
     //   user: this.state.user,
     //   setUser: this.setUser
     // }
-    console.log(process.env);
     return (
       <Fragment>
         <Router basename='/'>
