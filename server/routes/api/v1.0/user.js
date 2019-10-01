@@ -7,7 +7,7 @@ router.get('/login/fire', passport.authenticate('google'));
 router.get('/auth/callback', passport.authenticate('google', {
   failureRedirect: '/',
 }), (req, res) => {
-  res.json({'success': true})
+  res.redirect('/api/user');
 });
 
 router.get('/', (req, res, next) => {

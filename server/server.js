@@ -22,7 +22,7 @@ app.use(cors());
 let RedisStore = require('connect-redis')(session);
 let redisClient = redis.createClient({
   port: process.env.REDIS_PORT,
-  password: process.env.REDIS_PASSWORD
+  password: process.env.REDIS_SECRET
 });
 
 redisClient.on('connect', () => {
@@ -43,7 +43,8 @@ app.use(
   })
 );
 
-mongoose.connection.openUri(`mongodb://localhost:${process.env.MONGO_PORT}/${process.env.DB_NAME}`, { useNewUrlParser: true })
+mongoose.connection.openUri(`mongodb://${process.env.MONGO_ID}:${process.env.MONGO_SECRET}@localhost:${process.env.MONGO_PORT}/${process.env.DB_NAME}?authSource=admin`, 
+{ useNewUrlParser: true , useUnifiedTopology: true,})
   .once('open', () => {
     console.info('MongoDB client onnected to server.');
   })

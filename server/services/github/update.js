@@ -1,14 +1,15 @@
-    const path = require('path');
+const path = require('path');
 const queries = require('./queries');
 const { graphql } = require("@octokit/graphql");
 
 const mongoose = require('mongoose');
 if (!module.parent) {
-    require('dotenv').config({ path: path.join(__dirname, '../../../.env') });
+    require('dotenv').config({ path: path.join(__dirname, '../../.env.production') });
     console.log('Script github/update.js is being run independently.')
     mongoose.set('useFindAndModify', false);
-    mongoose.connect(`mongodb://localhost:${process.env.MONGO_PORT}/${process.env.DB_NAME}`, { useNewUrlParser: true });
-    mongoose.connection
+    mongoose.set('useCreateIndex', true);
+    mongoose.connection.openUri(`mongodb://${process.env.MONGO_ID}:${process.env.MONGO_SECRET}@localhost:${process.env.MONGO_PORT}/${process.env.DB_NAME}?authSource=admin`, 
+    { useNewUrlParser: true, useUnifiedTopology: true,})
         .once('open', () => {
             updateRepos()
                 .then(() => {
@@ -39,20 +40,20 @@ const getAllRepos = () => githubAPI(queries.getRepos)
             let topics = [];
             let report;
             let readme;
-            if (repo.owner.login != 'kdonbekci'){
+            if (repo.owner.login != 'kdonbekci') {
                 return;
             }
             // console.log(repo);
             if (repo.first) {
                 report = repo.first.text;
-                if(report) {
+                if (report) {
                     repo.report = report;
                     repo.fallbackToReadme = false;
                 }
             }
             if (repo.second) {
                 readme = repo.second.text;
-                if(readme) {
+                if (readme) {
                     repo.readme = readme;
                 }
             }

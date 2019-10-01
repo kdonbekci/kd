@@ -20,14 +20,9 @@ class App extends Component {
 
 
   render() {
-    // const context = {
-    //   user: this.state.user,
-    //   setUser: this.setUser
-    // }
     return (
       <Fragment>
         <Router basename='/'>
-          {/* <UserContext.Provider value={context}> */}
           <layout.Nav />
           <main>
             <Switch>
@@ -37,12 +32,10 @@ class App extends Component {
               <Route path='/projects/:id' component={routes.SingleProject} />
               <Route path='/education' component={routes.Education} />
               <Route path='/resume' component={routes.Resume} />
-              {/* <Route path='/stats' component={routes.Stats} /> */}
               <Route path='/internal-error' component={routes.InternalError} />
               <Route path='/' component={routes.NotFound} />
             </Switch>
           </main>
-          {/* </UserContext.Provider> */}
         </Router>
         <layout.Footer />
       </Fragment>
