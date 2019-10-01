@@ -1,17 +1,17 @@
 process.env.NODE_ENV = 'development';
-
-require('dotenv').config({path: `./.env.${process.env.NODE_ENV}`});
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, `.env.${process.env.NODE_ENV}`) });
 const express = require('express');
 const redis = require('redis')
 const mongoose = require('mongoose');
 mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 const bodyParser = require('body-parser');
 const compression = require('compression');
 const session = require('express-session');
 const morgan = require('morgan');
 const fs = require('fs');
 const cors = require('cors')
-const path = require('path');
 
 const routes = require('./routes');
 const auth = require('./auth')
@@ -19,7 +19,7 @@ const auth = require('./auth')
 const app = express();
 app.use(cors());
 
-let RedisStore = require('connect-redis')(session);
+let RedisStore = require('connect-redis')(session); 
 let redisClient = redis.createClient({
   port: process.env.REDIS_PORT,
   password: process.env.REDIS_SECRET
