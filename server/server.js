@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'development';
+process.env.NODE_ENV = 'production';
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, `.env.${process.env.NODE_ENV}`) });
 const express = require('express');
@@ -12,10 +12,8 @@ const session = require('express-session');
 const morgan = require('morgan');
 const fs = require('fs');
 const cors = require('cors')
-
 const routes = require('./routes');
 const auth = require('./auth')
-
 const app = express();
 app.use(cors());
 
@@ -29,7 +27,6 @@ redisClient.on('connect', () => {
   console.info('Redis client connected to server.')
 })
   .on('error', err => console.error('Redis error:', err));
-
 
 app.use(
   session({

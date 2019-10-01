@@ -18,7 +18,6 @@ class App extends Component {
     this.setState({ user });
   }
 
-
   render() {
     return (
       <Fragment>
